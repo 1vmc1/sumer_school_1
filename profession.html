@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!-- Язык страницы — русский -->
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <!-- Viewport для корректного отображения на мобильных устройствах -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Веб-разработчик</title>
+  <style>
+    /* Сбрасываем отступы браузера по умолчанию */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Основные настройки страницы */
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background-color: #f8fafc;     /* очень светлый серо-голубой фон */
+      color: #1e293b;                /* тёмный текст для читаемости */
+      line-height: 1.6;
+      padding: 2rem 1rem;            /* отступы по краям */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Центрируем контент, но не даём ему растянуться слишком широко */
+    .container {
+      max-width: 720px;
+      width: 100%;
+    }
+
+    /* ---- Заголовок ---- */
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2563eb;                /* акцентный синий */
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    /* ---- Подзаголовок / описание ---- */
+    .description {
+      font-size: 1.1rem;
+      color: #475569;
+      margin-bottom: 2rem;
+    }
+
+    /* ---- Сетка карточек ---- */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;  /* три колонки на широком экране */
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Одна карточка */
+    .card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 1.25rem;
+      transition: box-shadow 0.2s;    /* плавный эффект при наведении */
+    }
+
+    .card:hover {
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Имя факта (зарплата, перспективы, что нужно знать) */
+    .card h2 {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #2563eb;                /* синий акцент */
+      margin-bottom: 0.5rem;
+    }
+
+    /* Содержимое карточки */
+    .card p {
+      font-size: 0.95rem;
+      color: #334155;
+    }
+
+    /* ---- Цитата внизу ---- */
+    .quote {
+      text-align: center;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: #2563eb;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .quote-author {
+      display: block;
+      font-style: normal;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 0.4rem;
+    }
+
+    /* ---- Адаптация для мобильных экранов ---- */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 1.8rem;           /* заголовок помельче на телефоне */
+      }
+
+      .cards {
+        grid-template-columns: 1fr;  /* карточки друг под другом */
+      }
+
+      body {
+        padding: 1.5rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Большой заголовок -->
+    <h1>Веб-разработчик</h1>
+
+    <!-- Короткое описание профессии -->
+    <p class="description">
+      Веб-разработчик создаёт сайты и веб-приложения, которыми мы пользуемся каждый день.
+      Он пишет код, отвечающий за внешний вид страниц (фронтенд) или за логику сервера (бэкенд).
+      Это одна из самых востребованных IT-профессий с возможностью работать удалённо.
+    </p>
+
+    <!-- Три карточки с фактами -->
+    <div class="cards">
+      <!-- Карточка 1: зарплата -->
+      <div class="card">
+        <h2>💰 Зарплата</h2>
+        <p>
+          Junior-разработчик получает от 80 000 ₽, Middle — 200–350 тыс. ₽,
+          Senior — от 500 тыс. ₽. Доход сильно растёт с опытом.
+        </p>
+      </div>
+
+      <!-- Карточка 2: перспективы -->
+      <div class="card">
+        <h2>📈 Перспективы</h2>
+        <p>
+          Спрос на веб-разработчиков стабильно высокий. Можно вырасти до тимлида,
+          архитектора или уйти в смежные сферы — мобильную разработку, девопс, продакты.
+        </p>
+      </div>
+
+      <!-- Карточка 3: что нужно знать -->
+      <div class="card">
+        <h2>🧠 Что нужно знать</h2>
+        <p>
+          HTML, CSS, JavaScript — база. Далее — фреймворки (React, Vue) и работа
+          с сервером (Node.js, базы данных). Английский язык сильно упростит рост.
+        </p>
+      </div>
+    </div>
+
+    <!-- Мотивационная цитата -->
+    <div class="quote">
+      «Лучший способ научиться программировать — это программировать.»
+      <span class="quote-author">— народная мудрость</span>
+    </div>
+  </div>
+</body>
+</html>
