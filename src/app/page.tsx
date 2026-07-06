@@ -11,32 +11,26 @@ import { Button } from "antd";
 // Блок 3 — реальные рабочие задачи ML-инженера
 const tasks = [
   {
-    icon: "🧹",
     title: "Собирает и чистит данные",
     text: "Модель учится на данных, поэтому их сначала находят, приводят к порядку и убирают ошибки. «Мусор на входе — мусор на выходе».",
   },
   {
-    icon: "🎯",
     title: "Обучает и дообучает модели",
     text: "Подбирает алгоритм и «скармливает» ему данные, чтобы модель научилась предсказывать: например, кто из абонентов скоро уйдёт.",
   },
   {
-    icon: "📏",
     title: "Измеряет качество",
     text: "Проверяет метриками (числами качества), насколько модель точна, и честно отвечает: можно её запускать или ещё рано.",
   },
   {
-    icon: "🚀",
     title: "Выводит модель в продакшн",
     text: "Превращает модель в сервис (API), которым пользуется приложение. Инференс — это когда обученная модель отвечает на реальные запросы.",
   },
   {
-    icon: "📡",
     title: "Следит за моделью в бою",
     text: "Мониторит качество и дрифт данных (когда реальность меняется и модель устаревает), чтобы вовремя её переобучить.",
   },
   {
-    icon: "⚡",
     title: "Ускоряет и удешевляет",
     text: "Оптимизирует скорость и стоимость инференса — чтобы ответы были быстрыми, а серверы не стоили как самолёт.",
   },
@@ -80,12 +74,12 @@ const day = [
 
 // Блок 7 — зачем это ЭР-Телеком
 const business = [
-  { icon: "📉", title: "Прогноз оттока абонентов", text: "Модель заранее показывает, кто из клиентов может уйти, — и компания успевает предложить выгодные условия." },
-  { icon: "🛡️", title: "Антифрод", text: "ИИ ловит подозрительные операции и мошеннические схемы быстрее и точнее человека." },
-  { icon: "📶", title: "Оптимизация сети", text: "Предсказывает нагрузку и сбои, помогает держать интернет и ТВ стабильными для миллионов домов." },
-  { icon: "🎬", title: "Рекомендации", text: "Подсказывает абоненту фильмы и услуги, которые ему действительно интересны." },
-  { icon: "💬", title: "Поддержка на базе ИИ", text: "Умные чат-боты и подсказки операторам решают вопросы клиентов быстрее." },
-  { icon: "📊", title: "Аналитика больших данных", text: "Из терабайтов данных достаёт пользу для бизнес-решений всей компании." },
+  { title: "Прогноз оттока абонентов", text: "Модель заранее показывает, кто из клиентов может уйти, — и компания успевает предложить выгодные условия." },
+  { title: "Антифрод", text: "ИИ ловит подозрительные операции и мошеннические схемы быстрее и точнее человека." },
+  { title: "Оптимизация сети", text: "Предсказывает нагрузку и сбои, помогает держать интернет и ТВ стабильными для миллионов домов." },
+  { title: "Рекомендации", text: "Подсказывает абоненту фильмы и услуги, которые ему действительно интересны." },
+  { title: "Поддержка на базе ИИ", text: "Умные чат-боты и подсказки операторам решают вопросы клиентов быстрее." },
+  { title: "Аналитика больших данных", text: "Из терабайтов данных достаёт пользу для бизнес-решений всей компании." },
 ];
 
 // Блок 8 — тест «Моё ли это?»
@@ -109,8 +103,8 @@ const myths = [
    Мелкие переиспользуемые элементы
    ───────────────────────────────────────────────────────────── */
 
-const BRAND = "#0aa89e";
-const DEEP = "#0b7d75";
+const BRAND = "#003288";
+const DEEP = "#002563";
 
 function Section({
   id,
@@ -175,6 +169,28 @@ function HoverCard({ children }: { children: React.ReactNode }) {
   );
 }
 
+// Строгий номерной бейдж вместо иконок — единый корпоративный стиль
+function NumBadge({ n }: { n: number }) {
+  return (
+    <span
+      style={{
+        display: "inline-grid",
+        placeItems: "center",
+        minWidth: 42,
+        height: 42,
+        padding: "0 10px",
+        borderRadius: 10,
+        background: "var(--brand)",
+        color: "#fff",
+        fontWeight: 800,
+        fontSize: 16,
+      }}
+    >
+      {String(n).padStart(2, "0")}
+    </span>
+  );
+}
+
 /* ─────────────────────────────────────────────────────────────
    Интерактив 1 — тест «Моё ли это?»
    ───────────────────────────────────────────────────────────── */
@@ -188,10 +204,10 @@ function QuizBlock() {
 
   const result =
     score >= 4
-      ? { emoji: "🚀", head: "Похоже, это твоё!", text: "У тебя как раз тот склад ума, который нужен ML-инженеру. Загляни в раздел «С чего начать» — и вперёд." }
+      ? { head: "Похоже, это твоё!", text: "У тебя как раз тот склад ума, который нужен ML-инженеру. Загляни в раздел «С чего начать» — и вперёд." }
       : score >= 2
-      ? { emoji: "🌱", head: "Есть хорошая основа", text: "Многое уже про тебя. Попробуй пройти вводный курс по Python и ML — вдруг это твоя профессия." }
-      : { emoji: "🧭", head: "Присмотрись поближе", text: "Пока откликается не всё — и это нормально. Полистай сайт: возможно, профессия раскроется с новой стороны." };
+      ? { head: "Есть хорошая основа", text: "Многое уже про тебя. Попробуй пройти вводный курс по Python и ML — вдруг это твоя профессия." }
+      : { head: "Присмотрись поближе", text: "Пока откликается не всё — и это нормально. Полистай сайт: возможно, профессия раскроется с новой стороны." };
 
   return (
     <HoverCard>
@@ -240,10 +256,24 @@ function QuizBlock() {
         </div>
       ) : (
         <div style={{ textAlign: "center", padding: "16px 8px" }}>
-          <div style={{ fontSize: 56 }}>{result.emoji}</div>
+          <div
+            style={{
+              width: 96,
+              height: 96,
+              margin: "0 auto 12px",
+              borderRadius: "50%",
+              display: "grid",
+              placeItems: "center",
+              color: "#fff",
+              background: `conic-gradient(var(--brand-bright) ${(score / quiz.length) * 360}deg, #dbe3f0 0deg)`,
+            }}
+          >
+            <span style={{ width: 74, height: 74, borderRadius: "50%", background: BRAND, display: "grid", placeItems: "center", fontSize: 26, fontWeight: 800 }}>
+              {score}/{quiz.length}
+            </span>
+          </div>
           <h3 style={{ fontSize: "1.6rem", fontWeight: 800, color: "var(--ink)", margin: "8px 0" }}>{result.head}</h3>
           <p style={{ color: "var(--ink-soft)", maxWidth: 480, margin: "0 auto 8px" }}>{result.text}</p>
-          <p style={{ color: DEEP, fontWeight: 600 }}>Совпадений: {score} из {quiz.length}</p>
           <div className="flex gap-3 justify-center flex-wrap" style={{ marginTop: 16 }}>
             <Button onClick={() => { setDone(false); setAnswers(Array(quiz.length).fill(undefined)); }}>Пройти заново</Button>
             <Link href="#path"><Button type="primary">С чего начать</Button></Link>
@@ -354,10 +384,10 @@ export default function HomePage() {
       {/* ── Блок 3: чем занимается ── */}
       <Section eyebrow="Чем занимается" title="Реальные задачи ML-инженера" subtitle="Не абстрактная наука, а конкретная работа: превратить сырые данные в модель, которая приносит пользу — и удержать её в рабочем состоянии.">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {tasks.map((t) => (
+          {tasks.map((t, i) => (
             <HoverCard key={t.title}>
-              <div style={{ fontSize: 30 }}>{t.icon}</div>
-              <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", margin: "12px 0 8px" }}>{t.title}</h3>
+              <NumBadge n={i + 1} />
+              <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", margin: "14px 0 8px" }}>{t.title}</h3>
               <p style={{ color: "var(--ink-soft)", fontSize: 15, margin: 0, lineHeight: 1.55 }}>{t.text}</p>
             </HoverCard>
           ))}
@@ -368,8 +398,8 @@ export default function HomePage() {
       <Section eyebrow="Навыки" title="Что нужно уметь" subtitle="Hard skills — это инструменты и знания. Soft skills — то, как ты думаешь и работаешь с людьми. Сильному инженеру нужны и те, и другие." tinted>
         <div className="grid gap-6 md:grid-cols-2">
           {[
-            { head: "🛠️ Hard skills", sub: "Технические навыки", list: hardSkills, tint: "rgba(10,168,158,0.08)" },
-            { head: "💬 Soft skills", sub: "Личные качества", list: softSkills, tint: "rgba(40,232,220,0.10)" },
+            { head: "Hard skills", sub: "Технические навыки", list: hardSkills, tint: "rgba(0,50,136,0.05)" },
+            { head: "Soft skills", sub: "Личные качества", list: softSkills, tint: "rgba(25,122,232,0.07)" },
           ].map((col) => (
             <div key={col.head} style={{ ...cardStyle, background: col.tint }}>
               <h3 style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--ink)", margin: 0 }}>{col.head}</h3>
@@ -422,10 +452,10 @@ export default function HomePage() {
       {/* ── Блок 7: зачем ЭР-Телеком ── */}
       <Section eyebrow="Ценность для бизнеса" title="Зачем ML-инженер ЭР-Телеком Холдингу" subtitle="ЭР-Телеком — это интернет, ТВ и цифровые сервисы для миллионов домов. За таким масштабом стоят огромные данные — и модели, которые превращают их в качество услуг и экономию.">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {business.map((b) => (
+          {business.map((b, i) => (
             <HoverCard key={b.title}>
-              <div style={{ fontSize: 30 }}>{b.icon}</div>
-              <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", margin: "12px 0 8px" }}>{b.title}</h3>
+              <NumBadge n={i + 1} />
+              <h3 style={{ fontSize: "1.15rem", fontWeight: 700, color: "var(--ink)", margin: "14px 0 8px" }}>{b.title}</h3>
               <p style={{ color: "var(--ink-soft)", fontSize: 15, margin: 0, lineHeight: 1.55 }}>{b.text}</p>
             </HoverCard>
           ))}

@@ -17,22 +17,13 @@ const links = [
   { href: "/contacts", label: "Контакты" },
 ];
 
-// Логотип-заглушка. {/* пример — можно заменить: положите SVG ЭР-Телеком в public/logo/ */}
+// Фирменный знак ЭР-Телеком (взят из шаблона презентации Летней школы).
+// {/* пример — можно заменить на официальный SVG в public/logo/ */}
 function BrandMark() {
   return (
     <Link href="/" className="flex items-center gap-3 no-underline">
-      <span
-        className="grid place-items-center rounded-lg font-bold text-white"
-        style={{
-          width: 40,
-          height: 40,
-          background: "linear-gradient(135deg, var(--brand-deep), var(--brand-bright))",
-          fontSize: 15,
-          letterSpacing: "-0.02em",
-        }}
-      >
-        ЭР
-      </span>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/logo/ertelecom-mark.png" alt="ЭР-Телеком" width={40} height={40} />
       <span className="leading-tight">
         <span className="block font-semibold" style={{ color: "var(--ink)", fontSize: 15 }}>
           ЭР-Телеком Холдинг

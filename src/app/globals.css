@@ -3,17 +3,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Фирменные цвета ЭР-Телеком Холдинг.
-   --brand-bright — яркий бирюзовый бренда (#28e8dc), используем для градиентов/акцентов;
-   --brand — читаемый бирюзовый для кнопок/ссылок (контраст на белом);
-   --brand-deep — тёмный бирюзовый для текста-акцента и hover. */
+/* Фирменные цвета ЭР-Телеком Холдинг (взяты из шаблона презентации Летней школы).
+   --brand      — глубокий корпоративный синий (основной);
+   --brand-bright — яркий синий акцент (кнопки, ссылки, hover);
+   --brand-deep — самый тёмный синий (градиенты, hover);
+   --accent-amber — янтарный из логотипа, используем крайне дозированно. */
 :root {
-  --brand-bright: #28e8dc;
-  --brand: #0aa89e;
-  --brand-deep: #0b7d75;
-  --ink: #0f172a;      /* почти чёрный текст */
-  --ink-soft: #475569; /* спокойный серый текст */
-  --line: #e6eaee;     /* границы карточек */
+  --brand: #003288;
+  --brand-bright: #197ae8;
+  --brand-deep: #002563;
+  --accent-amber: #fbac02;
+  --ink: #0d1526;      /* почти чёрный текст */
+  --ink-soft: #4b5563; /* спокойный серый текст */
+  --line: #e6e9ef;     /* границы карточек */
+  --tint: #f7f7f7;     /* светло-серый фон секций */
 }
 
 html {
@@ -25,6 +28,7 @@ body {
   padding: 0;
   background: #ffffff;
   color: var(--ink);
+  font-family: Arial, "Helvetica Neue", system-ui, -apple-system, sans-serif;
 }
 
 /* Плавное появление секций при скролле (без цирка).
@@ -38,24 +42,42 @@ body {
   opacity: 1;
   transform: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
+
+/* Анимация перехода между страницами — срабатывает при смене маршрута */
+.page-anim {
+  animation: pageIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
     opacity: 1;
     transform: none;
-    transition: none;
   }
 }
 
-/* Мягкий бирюзовый градиент для «фонов-геро» */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .page-anim {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    animation: none;
+  }
+}
+
+/* Мягкий синий градиент для «фонов-геро» */
 .brand-hero-bg {
   background:
-    radial-gradient(1100px 460px at 12% -10%, rgba(40, 232, 220, 0.20), transparent 60%),
-    radial-gradient(900px 420px at 100% 0%, rgba(10, 168, 158, 0.14), transparent 55%);
+    radial-gradient(1100px 460px at 12% -10%, rgba(25, 122, 232, 0.16), transparent 60%),
+    radial-gradient(900px 420px at 100% 0%, rgba(0, 50, 136, 0.12), transparent 55%);
 }
 
 /* Градиентный текст акцента */
 .brand-gradient-text {
-  background: linear-gradient(90deg, var(--brand-deep), var(--brand-bright));
+  background: linear-gradient(90deg, var(--brand), var(--brand-bright));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

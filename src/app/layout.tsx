@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ConfigProvider } from "antd";
 import Link from "next/link";
 import NavBar from "@/components/NavBar";
+import PageTransition from "@/components/PageTransition";
 import "./globals.css";
 
 // Мета-данные для SEO и вкладки браузера (по-русски, про профессию)
@@ -24,35 +25,28 @@ export default function RootLayout({
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: "#0aa89e",
-              colorLink: "#0b7d75",
-              borderRadius: 12,
-              fontFamily:
-                "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
+              colorPrimary: "#003288",
+              colorLink: "#197ae8",
+              borderRadius: 10,
+              fontFamily: "Arial, 'Helvetica Neue', system-ui, sans-serif",
             },
           }}
         >
           <div className="min-h-screen flex flex-col">
             <NavBar />
 
-            {/* Основной контент — каждая страница сама задаёт свою ширину */}
-            <main className="flex-1 w-full">{children}</main>
+            {/* Основной контент — каждая страница сама задаёт свою ширину.
+                PageTransition проигрывает анимацию при смене маршрута. */}
+            <main className="flex-1 w-full">
+              <PageTransition>{children}</PageTransition>
+            </main>
 
             <footer style={{ borderTop: "1px solid var(--line)", background: "#fafcfc" }}>
               <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3">
                 <div>
                   <div className="flex items-center gap-3 mb-3">
-                    <span
-                      className="grid place-items-center rounded-lg font-bold text-white"
-                      style={{
-                        width: 36,
-                        height: 36,
-                        background: "linear-gradient(135deg, var(--brand-deep), var(--brand-bright))",
-                        fontSize: 14,
-                      }}
-                    >
-                      ЭР
-                    </span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/logo/ertelecom-mark.png" alt="ЭР-Телеком" width={34} height={34} />
                     <strong style={{ color: "var(--ink)" }}>ЭР-Телеком Холдинг</strong>
                   </div>
                   <p style={{ color: "var(--ink-soft)", fontSize: 14, margin: 0 }}>
