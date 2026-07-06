@@ -1,6 +1,7 @@
 [build]
+  base = "student-portfolio"
   command = "npm run build"
-  publish = "out"
+  publish = "student-portfolio/out"
 
 [build.environment]
   NODE_VERSION = "20"
