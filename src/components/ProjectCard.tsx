@@ -21,7 +21,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       {/* Теги (технологии) — каждый тег — это Ant Design Tag */}
       <Space wrap style={{ marginBottom: 16 }}>
         {project.tags.map((tag) => (
-          <Tag key={tag} color="blue">
+          <Tag key={tag} color="cyan">
             {tag}
           </Tag>
         ))}

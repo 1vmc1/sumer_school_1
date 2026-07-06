@@ -20,7 +20,7 @@ export default function ResourceCard({ resource }: { resource: Resource }) {
       {/* Метки-теги */}
       <Space wrap style={{ marginBottom: 16 }}>
         {resource.tags.map((tag) => (
-          <Tag key={tag} color="blue">
+          <Tag key={tag} color="cyan">
             {tag}
           </Tag>
         ))}

@@ -1,60 +1,120 @@
 "use client";
 
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Menu } from "antd";
-import {
-  HomeOutlined,
-  InfoCircleOutlined,
-  ProjectOutlined,
-  MailOutlined,
-  BookOutlined,
-  ExperimentOutlined,
-} from "@ant-design/icons";
+import { Drawer, Button, Grid } from "antd";
+import { MenuOutlined } from "@ant-design/icons";
 
-// Пункты меню: key совпадает с URL, label — ссылка для Next.js
-const menuItems = [
-  { key: "/", label: <Link href="/">Главная</Link>, icon: <HomeOutlined /> },
-  {
-    key: "/about",
-    label: <Link href="/about">О профессии</Link>,
-    icon: <InfoCircleOutlined />,
-  },
-  {
-    key: "/projects",
-    label: <Link href="/projects">Проекты</Link>,
-    icon: <ProjectOutlined />,
-  },
-  {
-    key: "/rl-game",
-    label: <Link href="/rl-game">RL игра</Link>,
-    icon: <ExperimentOutlined />,
-  },
-  {
-    key: "/resources",
-    label: <Link href="/resources">Ресурсы</Link>,
-    icon: <BookOutlined />,
-  },
-  {
-    key: "/contacts",
-    label: <Link href="/contacts">Контакты</Link>,
-    icon: <MailOutlined />,
-  },
+const { useBreakpoint } = Grid;
+
+// Пункты навигации: href — маршрут, label — подпись
+const links = [
+  { href: "/", label: "Главная" },
+  { href: "/projects", label: "Проекты" },
+  { href: "/rl-game", label: "RL-игра" },
+  { href: "/resources", label: "Ресурсы" },
+  { href: "/contacts", label: "Контакты" },
 ];
 
+// Логотип-заглушка. {/* пример — можно заменить: положите SVG ЭР-Телеком в public/logo/ */}
+function BrandMark() {
+  return (
+    <Link href="/" className="flex items-center gap-3 no-underline">
+      <span
+        className="grid place-items-center rounded-lg font-bold text-white"
+        style={{
+          width: 40,
+          height: 40,
+          background: "linear-gradient(135deg, var(--brand-deep), var(--brand-bright))",
+          fontSize: 15,
+          letterSpacing: "-0.02em",
+        }}
+      >
+        ЭР
+      </span>
+      <span className="leading-tight">
+        <span className="block font-semibold" style={{ color: "var(--ink)", fontSize: 15 }}>
+          ЭР-Телеком Холдинг
+        </span>
+        <span className="block" style={{ color: "var(--ink-soft)", fontSize: 12 }}>
+          Проект Летней школы
+        </span>
+      </span>
+    </Link>
+  );
+}
+
 export default function NavBar() {
-  // usePathname возвращает текущий путь (например, "/projects")
   const pathname = usePathname();
+  const screens = useBreakpoint();
+  const [open, setOpen] = useState(false);
+  const isDesktop = screens.md;
+
+  const NavLink = ({ href, label }: { href: string; label: string }) => {
+    const active = pathname === href;
+    return (
+      <Link
+        href={href}
+        onClick={() => setOpen(false)}
+        className="no-underline transition-colors"
+        style={{
+          color: active ? "var(--brand-deep)" : "var(--ink-soft)",
+          fontWeight: active ? 600 : 500,
+          padding: isDesktop ? "6px 2px" : "10px 0",
+          fontSize: isDesktop ? 15 : 17,
+          borderBottom: isDesktop
+            ? `2px solid ${active ? "var(--brand)" : "transparent"}`
+            : "none",
+          display: "block",
+        }}
+      >
+        {label}
+      </Link>
+    );
+  };
 
   return (
-    <Menu
-      mode="horizontal"
-      selectedKeys={[pathname]}
-      items={menuItems}
+    <div
+      className="sticky top-0 z-50"
       style={{
-        justifyContent: "center",
-        borderBottom: "1px solid #e5e7eb",
+        background: "rgba(255,255,255,0.85)",
+        backdropFilter: "blur(10px)",
+        borderBottom: "1px solid var(--line)",
       }}
-    />
+    >
+      <div className="max-w-6xl mx-auto px-4 flex items-center justify-between" style={{ height: 68 }}>
+        <BrandMark />
+
+        {isDesktop ? (
+          <nav className="flex items-center gap-7">
+            {links.map((l) => (
+              <NavLink key={l.href} {...l} />
+            ))}
+          </nav>
+        ) : (
+          <Button
+            type="text"
+            icon={<MenuOutlined style={{ fontSize: 20 }} />}
+            onClick={() => setOpen(true)}
+            aria-label="Открыть меню"
+          />
+        )}
+      </div>
+
+      <Drawer
+        placement="right"
+        open={open}
+        onClose={() => setOpen(false)}
+        width={260}
+        title="Меню"
+      >
+        <nav className="flex flex-col">
+          {links.map((l) => (
+            <NavLink key={l.href} {...l} />
+          ))}
+        </nav>
+      </Drawer>
+    </div>
   );
 }

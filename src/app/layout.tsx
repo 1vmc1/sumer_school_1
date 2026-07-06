@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { ConfigProvider } from "antd";
+import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import "./globals.css";
 
-// Мета-данные для SEO — отображаются в заголовке вкладки браузера
+// Мета-данные для SEO и вкладки браузера (по-русски, про профессию)
 export const metadata: Metadata = {
-  title: "ML-инженер",
+  title: "ML-инженер — профессия будущего | Проект Летней школы ЭР-Телеком",
   description:
-    "Сайт о профессии ML-инженера: проекты, ресурсы для обучения и полезные материалы",
+    "Кто такой ML-инженер простыми словами: чем занимается, какие навыки нужны, как прийти в профессию и зачем эта роль телеком-компании ЭР-Телеком Холдинг. Есть тест «Моё ли это?».",
 };
 
 // Корневой layout — оборачивает все страницы сайта
@@ -19,32 +20,77 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body>
-        {/*
-          ConfigProvider — глобальная тема Ant Design.
-          Здесь мы задаём синий акцентный цвет (#1677ff).
-        */}
+        {/* Глобальная тема Ant Design — фирменный бирюзовый акцент ЭР-Телеком */}
         <ConfigProvider
           theme={{
             token: {
-              colorPrimary: "#1677ff",
-              borderRadius: 8,
+              colorPrimary: "#0aa89e",
+              colorLink: "#0b7d75",
+              borderRadius: 12,
+              fontFamily:
+                "system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif",
             },
           }}
         >
-          {/* Минимальная структура: шапка + контент + подвал */}
           <div className="min-h-screen flex flex-col">
-            <header>
-              <NavBar />
-            </header>
+            <NavBar />
 
-            {/* Основной контент — каждая страница рендерится сюда */}
-            <main className="flex-1 w-full max-w-5xl mx-auto px-4 py-8">
-              {children}
-            </main>
+            {/* Основной контент — каждая страница сама задаёт свою ширину */}
+            <main className="flex-1 w-full">{children}</main>
 
-            {/* Подвал */}
-            <footer className="text-center py-6 text-gray-400 text-sm border-t border-gray-200">
-              &copy; {new Date().getFullYear()} Учебный проект. Сделано своими руками.
+            <footer style={{ borderTop: "1px solid var(--line)", background: "#fafcfc" }}>
+              <div className="max-w-6xl mx-auto px-4 py-10 grid gap-8 md:grid-cols-3">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span
+                      className="grid place-items-center rounded-lg font-bold text-white"
+                      style={{
+                        width: 36,
+                        height: 36,
+                        background: "linear-gradient(135deg, var(--brand-deep), var(--brand-bright))",
+                        fontSize: 14,
+                      }}
+                    >
+                      ЭР
+                    </span>
+                    <strong style={{ color: "var(--ink)" }}>ЭР-Телеком Холдинг</strong>
+                  </div>
+                  <p style={{ color: "var(--ink-soft)", fontSize: 14, margin: 0 }}>
+                    Проект Летней школы — сайт-проводник в&nbsp;профессию ML-инженера.
+                  </p>
+                </div>
+
+                <div>
+                  <div style={{ color: "var(--ink)", fontWeight: 600, marginBottom: 10 }}>
+                    Разделы
+                  </div>
+                  <div className="flex flex-col gap-2" style={{ fontSize: 14 }}>
+                    <Link href="/" style={{ color: "var(--ink-soft)" }}>Главная</Link>
+                    <Link href="/projects" style={{ color: "var(--ink-soft)" }}>Проекты</Link>
+                    <Link href="/rl-game" style={{ color: "var(--ink-soft)" }}>RL-игра</Link>
+                    <Link href="/resources" style={{ color: "var(--ink-soft)" }}>Ресурсы</Link>
+                  </div>
+                </div>
+
+                <div>
+                  <div style={{ color: "var(--ink)", fontWeight: 600, marginBottom: 10 }}>
+                    Команда
+                  </div>
+                  {/* впишите название команды */}
+                  <p style={{ color: "var(--ink-soft)", fontSize: 14, margin: 0 }}>
+                    Команда «___________»
+                    <br />
+                    Летняя школа ЭР-Телеком Холдинг, {new Date().getFullYear()}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                className="text-center py-4"
+                style={{ borderTop: "1px solid var(--line)", color: "#94a3b8", fontSize: 13 }}
+              >
+                © {new Date().getFullYear()} · Учебный проект Летней школы · ЭР-Телеком Холдинг
+              </div>
             </footer>
           </div>
         </ConfigProvider>

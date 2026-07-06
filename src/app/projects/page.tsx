@@ -8,12 +8,13 @@ const { Title, Paragraph } = Typography;
 
 export default function ProjectsPage() {
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Заголовок страницы */}
-      <Title level={2}>ML-проекты</Title>
-      <Paragraph className="text-base mb-6">
-        Шесть учебных ML-проектов: от классификации до рекомендательных систем.
-        Каждый — с кодом на GitHub.
+      <Title level={2}>Примеры ML-проектов</Title>
+      <Paragraph className="text-base mb-6" style={{ color: "var(--ink-soft)", maxWidth: 640 }}>
+        Так выглядят задачи, с которых начинают: от классификации картинок до
+        рекомендательных систем. Каждый проект — с кодом на GitHub, чтобы можно
+        было разобрать и повторить.
       </Paragraph>
 
       {/*

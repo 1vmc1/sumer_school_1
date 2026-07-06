@@ -8,12 +8,12 @@ const { Title, Paragraph } = Typography;
 
 export default function ResourcesPage() {
   return (
-    <div>
+    <div className="max-w-6xl mx-auto px-4 py-12">
       {/* Заголовок страницы */}
-      <Title level={2}>ML-ресурсы</Title>
-      <Paragraph className="text-base mb-6">
-        Курсы, документация и инструменты, которые помогут освоить ML.
-        От основ до продакшена.
+      <Title level={2}>Ресурсы для старта</Title>
+      <Paragraph className="text-base mb-6" style={{ color: "var(--ink-soft)", maxWidth: 640 }}>
+        Проверенные курсы, документация и инструменты — от первых основ до
+        вывода моделей в продакшн. С них удобно начать свой путь в профессию.
       </Paragraph>
 
       {/*

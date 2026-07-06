@@ -3,7 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Свои минимальные сбросы */
+/* Фирменные цвета ЭР-Телеком Холдинг.
+   --brand-bright — яркий бирюзовый бренда (#28e8dc), используем для градиентов/акцентов;
+   --brand — читаемый бирюзовый для кнопок/ссылок (контраст на белом);
+   --brand-deep — тёмный бирюзовый для текста-акцента и hover. */
+:root {
+  --brand-bright: #28e8dc;
+  --brand: #0aa89e;
+  --brand-deep: #0b7d75;
+  --ink: #0f172a;      /* почти чёрный текст */
+  --ink-soft: #475569; /* спокойный серый текст */
+  --line: #e6eaee;     /* границы карточек */
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -11,5 +23,40 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background: #f5f5f5;
+  background: #ffffff;
+  color: var(--ink);
+}
+
+/* Плавное появление секций при скролле (без цирка).
+   Класс .reveal ставится сразу, .is-visible добавляет IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Мягкий бирюзовый градиент для «фонов-геро» */
+.brand-hero-bg {
+  background:
+    radial-gradient(1100px 460px at 12% -10%, rgba(40, 232, 220, 0.20), transparent 60%),
+    radial-gradient(900px 420px at 100% 0%, rgba(10, 168, 158, 0.14), transparent 55%);
+}
+
+/* Градиентный текст акцента */
+.brand-gradient-text {
+  background: linear-gradient(90deg, var(--brand-deep), var(--brand-bright));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

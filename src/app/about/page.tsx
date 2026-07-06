@@ -6,7 +6,7 @@ const { Title, Paragraph } = Typography;
 
 export default function AboutPage() {
   return (
-    <div className="max-w-2xl mx-auto">
+    <div className="max-w-2xl mx-auto px-4 py-12">
       <Title level={2}>Кто такой ML-инженер</Title>
 
       <Paragraph>

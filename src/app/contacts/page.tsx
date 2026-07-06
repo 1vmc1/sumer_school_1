@@ -11,7 +11,7 @@ const { Title, Paragraph } = Typography;
 
 export default function ContactsPage() {
   return (
-    <div className="max-w-xl mx-auto text-center">
+    <div className="max-w-xl mx-auto text-center px-4 py-12">
       {/* Заголовок */}
       <Title level={2}>Контакты</Title>
 
